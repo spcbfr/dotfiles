@@ -1,0 +1,36 @@
+# Space Duck
+colors:
+  # Default colors
+  primary:
+    background: '#0f111b'
+    foreground: '#ecf0c1'
+  # Normal colors
+  normal:
+    black:   '#000000'
+    red:     '#f25244'
+    green:   '#5ccc96'
+    yellow:  '#b3a1e6'
+    blue:    '#59C2FF'
+    magenta: '#f2e15c'
+    cyan:    '#7a5ccc'
+    white:   '#686f9a'
+
+  # Bright colors
+  bright:
+    black:   '#686f9a'
+    red:     '#e33400'
+    green:   '#5ccc96'
+    yellow:  '#b3a1e6'
+    blue:    '#59C2FF'
+    magenta: '#f2e15c'
+    cyan:    '#7a5ccc'
+    white:   '#f0f1ce'
+window:
+    padding:
+      x: 3
+      y: 3
+
+font:
+    normal:
+      family: JetBrainsMonoMedium
+    size: 9

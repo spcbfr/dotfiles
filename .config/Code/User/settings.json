@@ -1,0 +1,14 @@
+{
+    "workbench.colorTheme": "spaceduck",
+    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "workbench.productIconTheme": "fluent-icons",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 20,
+    "editor.letterSpacing": 0.2,
+    "files.trimTrailingWhitespace": true,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.handleKeys": {
+        "<C-k>": false
+    },
+}
