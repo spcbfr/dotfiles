@@ -13,6 +13,8 @@ o.termguicolors = true
 -- I hate when text wraps
 o.wrap = false
 
+o.mouse = "a"
+
 -- makes moving across the file easier
 o.relativenumber = true
 o.number = true

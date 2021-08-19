@@ -19,6 +19,11 @@ alias ls=exa
 alias grep='grep --color=always'
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
+# window swallowing
+alias mpv="devour mpv"
+alias sxiv="devour sxiv"
+alias z="devour zathura"
+
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
@@ -35,6 +40,7 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+export QT_QPA_PLATFORMTHEME='qt5ct'
 
 
 # vi mode
@@ -84,7 +90,6 @@ bindkey '^[[P' delete-char
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
-remaps
 bindkey '^e' edit-command-line
 
 # Load syntax highlighting; should be last.

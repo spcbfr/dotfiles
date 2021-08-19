@@ -347,6 +347,7 @@ myKeys =
         [ ("M-C-r", spawn "xmonad --recompile")  -- Recompiles xmonad
         , ("M-S-r", spawn "xmonad --restart")    -- Restarts xmonad
         , ("M-S-q", io exitSuccess)              -- Quits xmonad
+        , ("M-s", spawn "maimpick")              -- taking screenshots
 
     -- KB_GROUP Run Prompt
         , ("M-d", spawn "dmenu_run -i -p \"Run: \"") -- Dmenu
@@ -365,8 +366,7 @@ myKeys =
         , ("M-p p", spawn "passmenu")     -- passmenu
         , ("M-p q", spawn "dm-logout")    -- logout menu
         , ("M-p r", spawn "dm-reddit")    -- reddio (a reddit viewer)
-        , ("M-p s", spawn "dm-websearch") -- search various search engines
-
+        , ("M-r", spawn (myTerminal ++ " -e ranger")) -- open ranger
     -- KB_GROUP Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn (myTerminal))
         , ("M-b", spawn (myBrowser ++ " www.youtube.com/c/DistroTube/"))

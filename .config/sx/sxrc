@@ -1,5 +1,6 @@
 remaps &
 xset r rate 300 50 &
 xsetroot -cursor_name Left_ptr
+dunst &
 exec xmonad
 setbg &
