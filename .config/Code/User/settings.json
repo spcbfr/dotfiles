@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "spaceduck",
+    "workbench.colorTheme": "Night Owl",
     "workbench.iconTheme": "eq-material-theme-icons-palenight",
     "workbench.productIconTheme": "fluent-icons",
     "editor.fontSize": 14,
@@ -11,4 +11,12 @@
     "vim.handleKeys": {
         "<C-k>": false
     },
+    "workbench.sideBar.location": "right",
+    "editor.fontFamily": "'Dank Mono', 'monospace'",
+    "workbench.activityBar.visible": false,
+    "editor.minimap.enabled": false,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.linux": "/home/youssef/.config/nvim/init.lua",
+    "editor.scrollBeyondLastLine": false,
+    "editor.lineNumbers": "relative",
 }

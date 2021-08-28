@@ -8,6 +8,7 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
 export PATH=$PATH:/$HOME/.local/bin
+export EDITOR=nvim
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -20,9 +21,10 @@ alias grep='grep --color=always'
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # window swallowing
-alias mpv="devour mpv"
+alias m="devour mpv"
 alias sxiv="devour sxiv"
 alias z="devour zathura"
+alias ka=killall
 
 # Basic auto/tab complete:
 autoload -U compinit
