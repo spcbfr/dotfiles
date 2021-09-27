@@ -22,24 +22,25 @@ return require('packer').startup(function()
     use 'tpope/vim-commentary' -- toggle comments with <leader>c
     use 'ap/vim-css-color' -- colors RGB and Hex codes
     use 'tpope/vim-sleuth' -- allows you to remove all settings related to tabs and indentation
+    use 'haishanh/night-owl.vim'
     use {
       'romgrk/barbar.nvim',
       requires = {'kyazdani42/nvim-web-devicons'}
     }
     use 'rhysd/clever-f.vim' -- extend vim's f and t functionality
-    use {
-          'hoob3rt/lualine.nvim',
-          requires = {'kyazdani42/nvim-web-devicons', opt = true},
-          config =  function()
-              require('lualine').setup {
-                 options = {
-                    theme = 'spaceduck',
-                    section_separators = {'', ''},
-                    icons_enabled = false
-                 }
-              }
-          end,
-    }
+ --   use {
+ --         'hoob3rt/lualine.nvim',
+ --         requires = {'kyazdani42/nvim-web-devicons', opt = true},
+ --         config =  function()
+ --             require('lualine').setup {
+ --                options = {
+ --                   theme = 'nightowl',
+ --                   section_separators = {'', ''},
+ --                   icons_enabled = false
+ --                }
+ --             }
+ --         end,
+ --   }
     use {
         'kyazdani42/nvim-tree.lua', -- experimenting with this as an alternative to NERDTree
         requires = 'kyazdani42/nvim-web-devicons'

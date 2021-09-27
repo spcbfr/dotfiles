@@ -1,6 +1,6 @@
 {
-    "workbench.colorTheme": "Night Owl",
-    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "workbench.colorTheme": "Tokyo Night",
+    "workbench.iconTheme": "nonicons",
     "workbench.productIconTheme": "fluent-icons",
     "editor.fontSize": 14,
     "editor.lineHeight": 20,
@@ -19,4 +19,25 @@
     "vscode-neovim.neovimInitVimPaths.linux": "/home/youssef/.config/nvim/init.lua",
     "editor.scrollBeyondLastLine": false,
     "editor.lineNumbers": "relative",
+    "workbench.colorCustomizations": {
+        "[Night Owl]": {
+          "activityBar.background": "#000C1D",
+          "activityBar.border": "#102a44",
+          "editorGroup.border": "#102a44",
+          "sideBar.background": "#001122",
+          "sideBar.border": "#102a44",
+          "sideBar.foreground": "#8BADC1"
+        },
+        "[Night Owl (No Italics)]": {
+          "activityBar.background": "#000C1D",
+          "activityBar.border": "#102a44",
+          "editorGroup.border": "#102a44",
+          "sideBar.background": "#001122",
+          "sideBar.border": "#102a44",
+          "sideBar.foreground": "#8BADC1"
+        }
+    },
+    "editor.fontLigatures": true,
+    "editor.bracketPairColorization.enabled": true
+
 }

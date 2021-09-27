@@ -89,10 +89,10 @@ myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
 
 myNormColor :: String
-myNormColor   = "#30365F"   -- Border color of normal windows
+myNormColor   = "#011627"   -- Border color of normal windows
 
 myFocusColor :: String
-myFocusColor  = "#59C2FF"   -- Border color of focused windows
+myFocusColor  = "#c792ea"   -- Border color of focused windows
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -522,11 +522,11 @@ main = do
               { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
                               >> hPutStrLn xmproc1 x                          -- xmobar on monitor 2
                               >> hPutStrLn xmproc2 x                          -- xmobar on monitor 3
-              , ppCurrent = xmobarColor "#5c65cc" "" . wrap "<box type=Bottom width=2 color=#5c65cc>" "</box>"         -- Current workspace
+              , ppCurrent = xmobarColor "#22da6e" "" . wrap "<box type=Bottom width=2 color=#22da6e>" "</box>"         -- Current workspace
               , ppVisible = xmobarColor "#c792ea" "" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#59C2FF" "" . wrap "<box type=Top width=2 color=#59C2FF>" "</box>" . clickable -- Hidden workspaces
-              , ppHiddenNoWindows = xmobarColor "#82AAFF" ""  . clickable     -- Hidden workspaces (no windows)
-              , ppTitle = xmobarColor "#ecf0c1" "" . shorten 60               -- Title of active window
+              , ppHidden = xmobarColor "#82AAFF" "" . wrap "<box type=Top width=2 color=#82AAFF>" "</box>" . clickable -- Hidden workspaces
+              , ppHiddenNoWindows = xmobarColor "#d6deeb" ""  . clickable     -- Hidden workspaces (no windows)
+              , ppTitle = xmobarColor "#d6deeb" "" . shorten 60               -- Title of active window
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
               , ppUrgent = xmobarColor "#f25244" "" . wrap "!" "!"            -- Urgent workspace
               , ppExtras  = [windowCount]                                     -- # of windows current workspace
