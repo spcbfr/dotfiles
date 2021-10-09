@@ -52,9 +52,15 @@
 
 (unpin! org-roam)
 (package! websocket)
+
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
 
- (package! org-fragtog
-   :recipe (:host github :repo "io12/org-fragtog"))
- (package! night-owl-theme
-   :recipe (:host github :repo "aaronjensen/night-owl-emacs"))
+(package! elcord)
+
+(package! dank-mode
+  :recipe (:host github :repo "john2x/dank-mode"
+           :files ("dank-mode.el" "lisp/*.el")))
+(package! org-fragtog)
+
+(package! rainbow-mode)
+
