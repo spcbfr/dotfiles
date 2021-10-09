@@ -1,0 +1,10 @@
+[user]
+	email = youssefbouzekri@protonmail.com
+	name = YoussefBouzekri
+[core]
+	editor = emacs
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[init]
+	defaultBranch = main
