@@ -1,0 +1,107 @@
+* Introduction
+This is my literate doom emacs configuration, feel free to fork the repo and use it as you please.
+* Appearance
+** Choosing a colorscheme
+doom comes with the set of implementations of popular colorschemes, I prefer to keep the default one. you can change the colorscheme for the current session using ~SPC h t~
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-one)
+#+end_src
+** Setting the different doom fonts
+doom allows you to customize the interface's fonts through 5 different /optional/ variables, they are:
++ ~doom-font~ the main font used for almost everything inside emacs
++ ~doom-serif-font~
++ ~doom-unicode-font~ used for icons that ~doomf-font~ does not support
++ ~doom-big-font~ used for ~doom-big-font-mode~ (useful for presentations)
+for each variable you can set the family, size and weight.
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "Cascadia Code" :size 13)
+      doom-big-font (font-spec :family "Operator Mono" :size 19))
+#+end_src
+** line numbers
+You can have 3 different options for displaying the line numbers
+- ~t~ enable line numbers (default)
+- ~'relative~ enable relative line numbers ( can cause doom to be run slower )
+- ~nil~ disable line number
+I personally prefer line numbers to be disabled at all times
+#+begin_src emacs-lisp
+(setq display-line-numbers-type nil)
+#+end_src
+** Mouse support
+Adding mouse support in the terminal version of Emacs.
+#+begin_src elisp
+(xterm-mouse-mode 1)
+#+end_src
+
+* Org-mode
+Org-mode is a markup language that happens to have built-in task-management, powerful note-taking features etc.. you can watch DistroTube's video to learn more about org-mode.
+all we need to do for org-mode to work, is set an org-mode directory:
+#+begin_src emacs-lisp
+(setq org-directory "~/docs/org/")
+#+end_src
+just for fun, I like to add a little ding sound effect when ~org-timer-set-timer~ runs out
+#+begin_src elisp
+(setq org-clock-sound "~/music/ding.wav")
+#+end_src
+I use the =org-fragtog= package to automatically toggle latex fragments, this is the command to set it up
+#+begin_src elisp
+(add-hook 'org-mode-hook 'org-fragtog-mode)
+#+end_src
+** org-roam
+org-roam is a package that extends org-roam's capabilities, it adds features like:
++ easy backlinking
++ graph view
++ daily notes
+in my setup I am using the latest version of org-roam which is *org-roam v2*, once again the most minimal org-roam setup needs a directory to store org-roam files
+#+begin_src emacs-lisp
+(setq org-roam-directory "~/docs/roam")
+#+end_src
+we also need to specifiy a directory for the org-roam dailies, this is relative to ~org-roam-directory~
+#+begin_src emacs-lisp
+(setq org-roam-dailies-directory "~/docs/roam/daily")
+#+end_src
+I like to add the timestamp to each daily entry, just to be more organized:
+#+begin_src elisp
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry "* %<%I:%M %p>: %?"
+         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+#+end_src
+*** Fast note insertion
+Sometimes while writing, you'll want to create a new node in your Org Roam notes without interrupting your writing flow! Typically you would use org-roam-node-insert, but when you create a new note with this command, it will open the new note after it gets created. this is in some cases kind of annoying, we can use this function to solve this issue:
+#+begin_src elisp
+(defun org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
+#+end_src
+finally, let's bind ~org-roam-node-insert-immediate~ to ~SPC n r I~
+#+begin_src elisp
+(map! :leader :desc "Insert node immediatly" :n "n r I" #'org-roam-node-insert-immediate)
+#+end_src
+
+* Elfeed
+elfeed is the standard modern emacs RSS feed reader. I use it for all my content consumtion. by default elfeed shows only entries from the last 2 weeks, this default filter can be changed
+#+begin_src elisp
+(after! elfeed
+  (setq elfeed-search-filter "@1-week-ago"))
+#+end_src
+
+#+begin_quote
+you can dynamicly change the filter inside elfeed by pressing ~s~
+#+end_quote
+
+we can set emacs to automatically update feed when opening elfeed using the following hook
+#+BEGIN_SRC elisp
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+#+END_SRC
+
+I also like to map elfeed to ~SPC r~ instead of typing ~M-x elfeed~ each time
+#+begin_src elisp
+(map! :leader :desc "Open elfeed" :n "r" #'elfeed)
+#+end_src
+* pdf-tools
+this is a package that let's you, read pdf documents inside emacs, it looks and feels like zathura which is the pdf viewer I am used to, except for one thing, I want dark mode to be enabled by default, for that we can use this hook:
+#+begin_SRC emacs-lisp
+(add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
+#+end_SRC

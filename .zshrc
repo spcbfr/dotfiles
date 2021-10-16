@@ -9,6 +9,10 @@ setopt interactive_comments
 
 export PATH=$PATH:/$HOME/.local/bin:/$HOME/.emacs.d/bin
 export EDITOR=nvim
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export MPD_HOST="localhost"
+export MPD_PORT="6601"
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -18,12 +22,13 @@ HISTFILE=~/.cache/zsh/history
 alias g=git
 alias ls=exa
 alias grep='grep --color=always'
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' # needed for my git bare repositorie setup for my dotfiles
 
 # window swallowing
 alias m="devour mpv"
 alias sxiv="devour sxiv"
 alias z="devour zathura"
+
 alias ka=killall
 
 # Basic auto/tab complete:
@@ -71,22 +76,6 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-
-# Use lf to switch directories and bind it to ctrl-o
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" >/dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-bindkey -s '^o' 'lfcd\n'
-
-bindkey -s '^a' 'bc -lq\n'
-
-bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
 bindkey '^[[P' delete-char
 

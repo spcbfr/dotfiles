@@ -1,50 +1,40 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
-(setq user-full-name "youssef bouzekri"
-      user-mail-address "youssefbouzekri@protonmail.com")
-
 (setq doom-theme 'doom-one)
 
-;; line numbers are slow and they aren't really needed
+(setq doom-font (font-spec :family "Cascadia Code" :size 13)
+      doom-big-font (font-spec :family "Operator Mono" :size 19))
+
 (setq display-line-numbers-type nil)
 
-(setq org-directory "~/docs/org")
-(setq org-roam-directory "~/docs/roam/")
-(setq org-id-locations-file "~/docs/roam/.orgids")
+(setq org-directory "~/docs/org/")
 
-;; open pdf documents in dark mode by default
+(setq org-roam-directory "~/docs/roam")
+
+(setq org-roam-dailies-directory "~/docs/roam/daily")
+
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 
-;; preview latex fragments automatically
+(xterm-mouse-mode 1)
+
+(setq org-clock-sound "~/music/ding.wav")
+
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
-;; org-roam-ui
-(use-package! websocket
-    :after org-roam)
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry "* %<%I:%M %p>: %?"
+         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
 
-(use-package! org-roam-ui
-    :after org-roam
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
-
-
-;; inserts an org-roam link immediately,
-;; without invoking the capture buffer
 (defun org-roam-node-insert-immediate (arg &rest args)
   (interactive "P")
   (let ((args (cons arg args))
         (org-roam-capture-templates (list (append (car org-roam-capture-templates)
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
-(map! :leader :desc "Insert link immediately"  :n "nrI" #'org-roam-node-insert-immediate)
 
-;; adds a timestamp to every org-roam-dailies entry
-(setq org-roam-dailies-capture-templates
-      '(("d" "default" entry "* %<%I:%M %p>: %?"
-         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+(map! :leader :desc "Insert node immediatly" :n "n r I" #'org-roam-node-insert-immediate)
 
-;; play a ding sound when an org-timer reaches zero
-(setq org-clock-sound "~/music/ding.wav")
+(after! elfeed
+  (setq elfeed-search-filter "@1-week-ago"))
+
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+
+(map! :leader :desc "Open elfeed" :n "r" #'elfeed)
