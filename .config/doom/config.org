@@ -88,7 +88,8 @@ finally, let's bind ~org-roam-node-insert-immediate~ to ~SPC n r I~
 #+begin_src elisp
 (map! :leader :desc "Insert node immediatly" :n "n r I" #'org-roam-node-insert-immediate)
 #+end_src
-
+** Anki-editor
+anki-editor is an emacs package that allows you to make anki flashcards using org-mode
 * Elfeed
 elfeed is the standard modern emacs RSS feed reader. I use it for all my content consumtion. by default elfeed shows only entries from the last 2 weeks, this default filter can be changed
 #+begin_src elisp
