@@ -1,40 +1,49 @@
 * Introduction
 This is my literate doom emacs configuration, feel free to fork the repo and use it as you please.
-* Appearance
+* Rudimentary configuration
+** Personal information
+here I define my name and email address which can be used by things like magit, GPG, org-mode, etc..
+#+begin_src elisp
+(setq user-full-name "Youssef Bouzekri"
+      user-mail-address "youssefbouzekri@protonmail.com")
+#+end_src
 ** Choosing a colorscheme
 doom comes with the set of implementations of popular colorschemes, I prefer to keep the default one. you can change the colorscheme for the current session using ~SPC h t~
 #+begin_src emacs-lisp
 (setq doom-theme 'doom-one)
 #+end_src
 ** Setting the different doom fonts
-doom allows you to customize the interface's fonts through 5 different /optional/ variables, they are:
-+ ~doom-font~ the main font used for almost everything inside emacs
-+ ~doom-serif-font~
-+ ~doom-unicode-font~ used for icons that ~doomf-font~ does not support
-+ ~doom-big-font~ used for ~doom-big-font-mode~ (useful for presentations)
+doom allows you to customize the interface's fonts through 5 different /optional/ variables
 for each variable you can set the family, size and weight.
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Cascadia Code" :size 13)
-      doom-big-font (font-spec :family "Operator Mono" :size 19))
+(setq doom-font (font-spec :family "Iosevka" :size 13)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 24)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 13)
+      doom-unicode-font (font-spec :family "JuliaMono")
+      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 #+end_src
 ** line numbers
-You can have 3 different options for displaying the line numbers
-- ~t~ enable line numbers (default)
-- ~'relative~ enable relative line numbers ( can cause doom to be run slower )
-- ~nil~ disable line number
-I personally prefer line numbers to be disabled at all times
+I personally prefer line numbers to be disabled at all times, it speeds things up, especially on my thinkpad t420 from 2011
 #+begin_src emacs-lisp
 (setq display-line-numbers-type nil)
 #+end_src
-** Mouse support
-Adding mouse support in the terminal version of Emacs.
-#+begin_src elisp
-(xterm-mouse-mode 1)
-#+end_src
 
+* Cleaning up the dashboard
+first, let's start by making the keybindings simpler when on the doom dashboard since there are no major-mode-specific keybindings to interfear with here.
+#+begin_src elisp
+(map! :map +doom-dashboard-mode-map
+      :ne "f" #'find-file
+      :ne "p" #'doom/open-private-config
+      :ne "c" (cmd! (find-file (expand-file-name "config.org" doom-private-dir)))
+      :ne "q" #'save-buffers-kill-terminal)
+#+end_src
+now, let's remove the =Doom Useful Commands= because I've basically memorized all the keybindings
+#+begin_src elisp
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+#+end_src
 * Org-mode
 Org-mode is a markup language that happens to have built-in task-management, powerful note-taking features etc.. you can watch DistroTube's video to learn more about org-mode.
-all we need to do for org-mode to work, is set an org-mode directory:
+all we need to do for org-mode to work, is set an org-mode directory
 #+begin_src emacs-lisp
 (setq org-directory "~/docs/org/")
 #+end_src
@@ -55,7 +64,7 @@ in my setup I am using the latest version of org-roam which is *org-roam v2*, on
 #+begin_src emacs-lisp
 (setq org-roam-directory "~/docs/roam")
 #+end_src
-we also need to specifiy a directory for the org-roam dailies, this is relative to ~org-roam-directory~
+we also need to specifiy a directory for the org-roam dailies, this is relative to ~org-roam-directory~:
 #+begin_src emacs-lisp
 (setq org-roam-dailies-directory "~/docs/roam/daily")
 #+end_src
@@ -105,3 +114,18 @@ this is a package that let's you, read pdf documents inside emacs, it looks and 
 #+begin_SRC emacs-lisp
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 #+end_SRC
+* Which-key
+which-key is the thing that pops up whenever you start typing a command, but it takes too long to show up, let's speed it up a bit
+#+begin_src elisp
+(setq which-key-idle-delay 0.5) ;; I need the help, I really do
+#+end_src
+having the ~evil-~ prefix before every evil-mode command is a bit too verbose let's make that a bit simpler
+#+begin_src elisp
+(setq which-key-allow-multiple-replacements t)
+(after! which-key
+  (pushnew!
+   which-key-replacement-alist
+   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
+   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
+   ))
+#+end_src

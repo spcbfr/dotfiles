@@ -31,9 +31,12 @@ Config { font    = "xft:monospace:weight=bold:pixelsize=11:antialias=true:hintin
                     , Run Com "/home/youssef/.local/bin/pacupdate" [] "pacupdate" 36000
                       -- Runs a standard shell command 'uname -r' to get kernel version
                     , Run Com "uname" ["-r"] "" 3600
+                    , Run Weather "DTTA" [ "--template", "<skyCondition> | <tempC>°C"
+                             ] 36000
+
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{  <box type=Bottom width=2 color=#22DA6E><fc=#22DA6E><action=`alacritty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 color=#ef5350><fc=#ef5350><action=`alacritty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 color=#c792ea><fc=#c792ea><action=`alacritty -e htop`>%disku%</action></fc></box>    <box type=Bottom width=2 color=#21C7A8><fc=#21C7A8><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>    "
+       , template = " %UnsafeStdinReader% }{  <box type=Bottom width=2 color=#22DA6E><fc=#22DA6E><action=`alacritty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 color=#ef5350><fc=#ef5350><action=`alacritty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 color=#c792ea><fc=#c792ea><action=`alacritty -e htop`>%disku%</action></fc></box>    <box type=Bottom width=2 color=#21C7A8><fc=#21C7A8><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>    "
        }

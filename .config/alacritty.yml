@@ -66,5 +66,5 @@ window:
 
 font:
     normal:
-      family: Dank Mono
+      family: monospace
     size: 9
