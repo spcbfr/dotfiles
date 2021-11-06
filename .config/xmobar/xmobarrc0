@@ -7,8 +7,8 @@ Config { font    = "xft:monospace:weight=bold:pixelsize=11:antialias=true:hintin
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
                            ]
-       , bgColor = "#011627"
-       , fgColor = "#d6deeb"
+       , bgColor = "#282c34"
+       , fgColor = "#bbc2cf"
        , position = Static { xpos = 0 , ypos = 0, width = 1366, height = 24 }
        , lowerOnStart = True
        , hideOnStart = False
@@ -38,5 +38,5 @@ Config { font    = "xft:monospace:weight=bold:pixelsize=11:antialias=true:hintin
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{  <box type=Bottom width=2 color=#22DA6E><fc=#22DA6E><action=`alacritty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 color=#ef5350><fc=#ef5350><action=`alacritty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 color=#c792ea><fc=#c792ea><action=`alacritty -e htop`>%disku%</action></fc></box>    <box type=Bottom width=2 color=#21C7A8><fc=#21C7A8><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>    "
+       , template = " %UnsafeStdinReader% }{  <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 color=#51afef><fc=#51afef><action=`alacritty -e htop`>%disku%</action></fc></box>    <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>    "
        }

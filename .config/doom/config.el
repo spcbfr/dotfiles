@@ -3,7 +3,7 @@
 
 (setq doom-theme 'doom-one)
 
-(setq doom-font (font-spec :family "Iosevka" :size 13)
+(setq doom-font (font-spec :family "monospace" :size 13)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 13)
       doom-unicode-font (font-spec :family "JuliaMono")
@@ -21,7 +21,7 @@
 
 (setq org-directory "~/docs/org/")
 
-(setq org-clock-sound "~/music/ding.wav")
+(setq org-clock-sound "~/docs/ding.wav")
 
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 

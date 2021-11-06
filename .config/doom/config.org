@@ -16,7 +16,7 @@ doom comes with the set of implementations of popular colorschemes, I prefer to 
 doom allows you to customize the interface's fonts through 5 different /optional/ variables
 for each variable you can set the family, size and weight.
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Iosevka" :size 13)
+(setq doom-font (font-spec :family "monospace" :size 13)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 13)
       doom-unicode-font (font-spec :family "JuliaMono")
@@ -49,7 +49,7 @@ all we need to do for org-mode to work, is set an org-mode directory
 #+end_src
 just for fun, I like to add a little ding sound effect when ~org-timer-set-timer~ runs out
 #+begin_src elisp
-(setq org-clock-sound "~/music/ding.wav")
+(setq org-clock-sound "~/docs/ding.wav")
 #+end_src
 I use the =org-fragtog= package to automatically toggle latex fragments, this is the command to set it up
 #+begin_src elisp

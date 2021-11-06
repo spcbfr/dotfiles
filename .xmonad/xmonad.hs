@@ -465,7 +465,7 @@ myKeys =
         , ("M-e i", spawn (myEmacs ++ ("--eval '(erc)'")))       -- erc irc client
         , ("M-e m", spawn (myEmacs ++ ("--eval '(mu4e)'")))      -- mu4e email
         , ("M-e n", spawn (myEmacs ++ ("--eval '(elfeed)'")))    -- elfeed rss
-        , ("M-e s", spawn (myEmacs ++ ("--eval '(eshell)'")))    -- eshell
+        , ("M-e v", spawn (myEmacs ++ ("--eval '(+vterm/here nil)'")))  -- vterm
         , ("M-e t", spawn (myEmacs ++ ("--eval '(mastodon)'")))  -- mastodon.el
         -- , ("C-e v", spawn (myEmacs ++ ("--eval '(vterm nil)'"))) -- vterm if on GNU Emacs
         , ("C-e v", spawn (myEmacs ++ ("--eval '(+vterm/here nil)'"))) -- vterm if on Doom Emacs
@@ -521,13 +521,13 @@ main = do
               { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
                               >> hPutStrLn xmproc1 x                          -- xmobar on monitor 2
                               >> hPutStrLn xmproc2 x                          -- xmobar on monitor 3
-              , ppCurrent = xmobarColor "#22da6e" "" . wrap "<box type=Bottom width=2 color=#22da6e>" "</box>"         -- Current workspace
-              , ppVisible = xmobarColor "#c792ea" "" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#82AAFF" "" . wrap "<box type=Top width=2 color=#82AAFF>" "</box>" . clickable -- Hidden workspaces
+              , ppCurrent = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 color=#c678dd>" "</box>"         -- Current workspace
+              , ppVisible = xmobarColor "#bbc2cf" "" . clickable              -- Visible but not current workspace
+              , ppHidden = xmobarColor "#51afef" "" . wrap "<box type=Top width=2 color=#51afef>" "</box>" . clickable -- Hidden workspaces
               , ppHiddenNoWindows = xmobarColor "#d6deeb" ""  . clickable     -- Hidden workspaces (no windows)
-              , ppTitle = xmobarColor "#d6deeb" "" . shorten 60               -- Title of active window
+              , ppTitle = xmobarColor "#bbc2cf" "" . shorten 60               -- Title of active window
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
-              , ppUrgent = xmobarColor "#f25244" "" . wrap "!" "!"            -- Urgent workspace
+              , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"            -- Urgent workspace
               , ppExtras  = [windowCount]                                     -- # of windows current workspace
               , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
               }
