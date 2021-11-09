@@ -5,5 +5,3 @@
 	editor = emacs
 [init]
 	defaultBranch = main
-[credential]
-	credentialStore = cache
