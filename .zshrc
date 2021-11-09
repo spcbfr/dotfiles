@@ -9,6 +9,7 @@ setopt interactive_comments
 
 export PATH=$PATH:/$HOME/.local/bin:/$HOME/.emacs.d/bin
 export EDITOR=nvim
+export XDG_DATA_HOME=$HOME/.local/share
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export MPD_HOST="localhost"
 export MPD_PORT="6601"
