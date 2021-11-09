@@ -25,7 +25,7 @@ alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' # needed
 
 # window swallowing
 alias m="devour mpv"
-alias sxiv="devour sxiv"
+alias sxiv="devour nsxiv"
 alias z="devour zathura"
 
 alias ka=killall
