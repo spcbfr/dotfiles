@@ -17,15 +17,15 @@ Config { font    = "xft:monospace:weight=bold:pixelsize=11:antialias=true:hintin
        , iconRoot = "/home/dt/.xmonad/xpm/"  -- default: "."
        , commands = [
                     -- Time and date
-                      Run Date "<fn=2>\xf017</fn>  %b %d %Y - (%H:%M) " "date" 50
+                      Run Date "<fn=2>\xf017</fn> %I:%M %p " "date" 50
                       -- Network up and down
                     , Run Network "enp6s0" ["-t", "<fn=2>\xf0ab</fn>  <rx>kb  <fn=2>\xf0aa</fn>  <tx>kb"] 20
                       -- Cpu usage in percent
-                    , Run Cpu ["-t", "<fn=2>\xf108</fn>  cpu: (<total>%)","-H","50","--high","red"] 20
+                    , Run Cpu ["-t", "<fn=2>\xf2db</fn> CPU <total>%","-H","50","--high","red"] 20
                       -- Ram used number and percent
-                    , Run Memory ["-t", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"] 20
+                    , Run Memory ["-t", "<fn=2>\62776</fn> <used> MB"] 20
                       -- Disk space free
-                    , Run DiskU [("/", "<fn=2>\xf0c7</fn>  hdd: <free> free")] [] 60
+                    , Run DiskU [("/", "<fn=2>\xf0c7</fn> <free> free")] [] 60
                       -- Runs a standard shell command 'uname -r' to get kernel version
                     , Run Com "uname" ["-r"] "" 3600
                     -- Weather in xmobar
@@ -35,5 +35,5 @@ Config { font    = "xft:monospace:weight=bold:pixelsize=11:antialias=true:hintin
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{  <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>       "
+       , template = " %UnsafeStdinReader% }{  <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e htop`>%cpu%</action></fc></box>   <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>   <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>   "
        }

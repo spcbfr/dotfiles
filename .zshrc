@@ -85,3 +85,4 @@ bindkey '^e' edit-command-line
 
 # Load syntax highlighting; should be last.
 source /home/youssef/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
