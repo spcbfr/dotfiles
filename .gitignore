@@ -2,6 +2,7 @@
 .idea
 *.log
 tmp/
+config.el
 xmonad.hi
 xmonad.o
 xmonad-x86_64-linux
