@@ -14,7 +14,7 @@ Config { font    = "xft:monospace:weight=bold:pixelsize=11:antialias=true:hintin
        , hideOnStart = False
        , allDesktops = True
        , persistent = True
-       , iconRoot = "/home/dt/.xmonad/xpm/"  -- default: "."
+       , iconRoot = "~/.xmonad/xpm/"  -- default: "."
        , commands = [
                     -- Time and date
                       Run Date "<fn=2>\xf017</fn> %I:%M %p " "date" 50
@@ -26,14 +26,18 @@ Config { font    = "xft:monospace:weight=bold:pixelsize=11:antialias=true:hintin
                     , Run Memory ["-t", "<fn=2>\62776</fn> <used> MB"] 20
                       -- Disk space free
                     , Run DiskU [("/", "<fn=2>\xf0c7</fn> <free> free")] [] 60
-                      -- Runs a standard shell command 'uname -r' to get kernel version
-                    , Run Com "uname" ["-r"] "" 3600
                     -- Weather in xmobar
-                    , Run Weather "DTTA" [ "--template", "<skyCondition> | <tempC>°C"
-                             ] 36000
+                    , Run Com "xmobar-music" [] "music" 10
+                    , Run Weather "DTTA" [ "--template", "<fn=2>\xf0c2</fn> <tempC>°C"] 36000
+                    , Run MPD
+                    [ "-t", "<artist> - <title>", "--"
+                    , "-P", ">>", "-Z", "||"
+                    , "--host", "127.0.0.1"
+                    ] 10
+
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{  <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e htop`>%cpu%</action></fc></box>   <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>   <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>   "
+       , template = " %UnsafeStdinReader% }{<fc=#DFDFDF><action=`alacritty -e ncmpcpp`>%music%</action></fc>   <box type=Bottom width=2 color=#51afef><fc=#51afef><action=`alacritty -e htop`>%DTTA%</action></fc></box>   <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e htop`>%cpu%</action></fc></box>   <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>   <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>   "
        }

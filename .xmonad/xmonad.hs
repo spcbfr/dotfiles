@@ -98,10 +98,8 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "lxsession &"
     spawnOnce "picom &"
     spawnOnce "nm-applet &"
-    spawnOnce "volumeicon &"
     -- spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
     spawnOnce "/usr/bin/emacs --daemon &" -- emacs daemon for the emacsclient
     spawnOnce "setbg"  -- set xwallpaper
@@ -298,7 +296,8 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| wideAccordion
 
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
-myWorkspaces = [" dev ", " www ", " sys ", " doc ", " gfx ", " chat ", " mus ", " vid " ]
+myWorkspaces = [" dev ", " web ", " sys ", " docs ", " gfx ", " chat ", " music ", " vid " ]
+-- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 " ]
 myWorkspaceIndices = M.fromList $ zip myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -449,10 +448,10 @@ main = do
               { ppOutput = hPutStrLn xmproc                                   -- launching xmobar
               , ppCurrent = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 color=#c678dd>" "</box>"         -- Current workspace
               , ppVisible = xmobarColor "#bbc2cf" "" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#51afef" "" . wrap "<box type=Top width=2 color=#51afef>" "</box>" . clickable -- Hidden workspaces
+              , ppHidden = xmobarColor "#51afef" "" . clickable -- Hidden workspaces
               , ppHiddenNoWindows = xmobarColor "#d6deeb" ""  . clickable     -- Hidden workspaces (no windows)
               -- , ppTitle = xmobarColor "#bbc2cf" "" . shorten 60               -- Title of active window
-              , ppTitle = const "" -- Removing title completely
+              , ppTitle = const ""                                            -- Removing title completely
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
               , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"            -- Urgent workspace
               , ppExtras  = [windowCount]                                     -- # of windows current workspace
