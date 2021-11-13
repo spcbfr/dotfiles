@@ -46,6 +46,7 @@ Org-mode is a markup language that happens to have built-in task-management, pow
 all we need to do for org-mode to work, is set an org-mode directory
 #+begin_src emacs-lisp
 (setq org-directory "~/docs/org/")
+
 #+end_src
 just for fun, I like to add a little ding sound effect when ~org-timer-set-timer~ runs out
 #+begin_src elisp

@@ -188,7 +188,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| tallAccordion
                                  ||| wideAccordion
 
-myWorkspaces = [" I ", " II ", " III ", " IV ", " VI ", " VII ", " VIII ", " IX " ]
+myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII " ]
 myWorkspaceIndices = M.fromList $ zip myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -228,6 +228,7 @@ myKeys =
 
     -- KB_GROUP Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn myTerminal)
+        , ("M-r", spawn (myTerminal ++ " -e ncmpcpp")) -- launch my music setup
 
     -- KB_GROUP Kill windows
         , ("M-q", kill1)     -- Kill the currently focused client
