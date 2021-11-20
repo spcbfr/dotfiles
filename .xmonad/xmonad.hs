@@ -69,10 +69,10 @@ myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super key
 
 myTerminal :: String
-myTerminal = "alacritty"    -- Sets default terminal
+myTerminal = "alacritty"
 
 myBrowser :: String
-myBrowser = "firefox "  -- Sets firefox as main browser
+myBrowser = "brave "
 
 myEmacs :: String
 myEmacs = "emacsclient -c -a 'emacs' "  -- Makes emacs keybindings easier to type
@@ -188,7 +188,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| tallAccordion
                                  ||| wideAccordion
 
-myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII " ]
+myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX " ]
 myWorkspaceIndices = M.fromList $ zip myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -229,14 +229,11 @@ myKeys =
     -- KB_GROUP Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn myTerminal)
         , ("M-r", spawn (myTerminal ++ " -e ncmpcpp")) -- launch my music setup
+        , ("M-w", spawn myBrowser)
 
     -- KB_GROUP Kill windows
         , ("M-q", kill1)     -- Kill the currently focused client
         , ("M-S-a", killAll)   -- Kill all windows on current workspace
-
-    -- KB_GROUP Workspaces
-        , ("M-.", nextScreen)  -- Switch focus to next monitor
-        , ("M-,", prevScreen)  -- Switch focus to prev monitor
 
     -- KB_GROUP Floating windows
         , ("M-f", sendMessage (T.Toggle "floats")) -- Toggles my 'floats' layout
