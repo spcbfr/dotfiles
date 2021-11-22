@@ -32,6 +32,7 @@ alias cp="cp -i"
 alias m="devour mpv"
 alias sxiv="devour nsxiv"
 alias z="devour zathura"
+alias clear="echo -en \"\x1b[2J\x1b[1;1H\"" # This syntax is 40 times faster than /bin/clear
 
 alias ka=killall
 
@@ -117,6 +118,11 @@ function extract {
     done
 fi
 }
+# Zsh Insulter: Randomly insults the user when typing wrong command.
+if [ -f /etc/bash.command-not-found ]; then
+    . /etc/bash.command-not-found
+fi
+
 
 
 bindkey '^[[P' delete-char
