@@ -22,6 +22,7 @@ HISTFILE=~/.cache/zsh/history
 alias g=git
 alias p=paru
 alias ls="exa --icons --color=always --group-directories-first"
+alias cat="bat --theme TwoDark" # Bat is a cat alternative, it shows pretty output
 alias grep='grep --color=always'
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' # needed for my git bare repositorie setup for my dotfiles
 alias df="df -h"
