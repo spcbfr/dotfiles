@@ -131,3 +131,8 @@ having the ~evil-~ prefix before every evil-mode command is a bit too verbose le
    '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
    ))
 #+end_src
+* Dashboard
+I like my dashboard banner to be the default emacs logo
+#+begin_src elisp
+(setq fancy-splash-image "~/.config/doom/emacs-e.svg")
+#+end_src
