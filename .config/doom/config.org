@@ -116,6 +116,16 @@ this is a package that let's you, read pdf documents inside emacs, it looks and 
 #+begin_SRC emacs-lisp
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 #+end_SRC
+* RAINBOW MODE
+Rainbox mode displays the actual color for any hex value color.  It's such a nice feature that I wanted it turned on all the time, regardless of what mode I am in.  The following creates a global minor mode for rainbow-mode and enables it.
+
+#+begin_src emacs-lisp
+(define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  (lambda () (rainbow-mode 1)))
+(global-rainbow-mode 1 )
+#+end_src
+
+
 * Which-key
 which-key is the thing that pops up whenever you start typing a command, but it takes too long to show up, let's speed it up a bit
 #+begin_src elisp

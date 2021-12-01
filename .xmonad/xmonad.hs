@@ -225,7 +225,7 @@ myKeys =
         , ("M-S-r", spawn "xmonad --restart")    -- Restarts xmonad
         , ("M-S-q", io exitSuccess)              -- Quits xmonad
         , ("M-s", spawn "maimpick")              -- taking screenshots
-        , ("M-d", spawn "rofi -show drun") -- Dmenu
+        , ("M-d", spawn "dmenu_run -l 20") -- Dmenu
 
     -- KB_GROUP Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn myTerminal)
