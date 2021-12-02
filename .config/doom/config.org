@@ -1,148 +1,122 @@
-* Introduction
-This is my literate doom emacs configuration, feel free to fork the repo and use it as you please.
-* Rudimentary configuration
-** Personal information
-here I define my name and email address which can be used by things like magit, GPG, org-mode, etc..
+
+* Doom Emacs Configuration
+
+#+begin_quote
+Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do. — Donald Knuth
+#+end_quote
+** TODO Introduction
+
+** Rudimentary configuration
+Make this file run slightly faster with lexical binding
 #+begin_src elisp
-(setq user-full-name "Youssef Bouzekri"
+;;; config.el -*- lexical-binding: t; -*-
+#+end_src
+
+*** Personal Information
+It is useful to have some personal information, this is used for gpg, magit and such.
+#+begin_src elisp
+(setq user-full-name "spcbfr"
       user-mail-address "youssefbouzekri@protonmail.com")
 #+end_src
-** Choosing a colorscheme
-doom comes with the set of implementations of popular colorschemes, I prefer to keep the default one. you can change the colorscheme for the current session using ~SPC h t~
-#+begin_src emacs-lisp
-(setq doom-theme 'doom-one)
+*** Better defaults
+#+begin_src elisp
+(setq-default
+ window-combination-resize t                      ; take new window space from all other windows (not just current)
+ x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+
+(setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
+      truncate-string-ellipsis "…"                ; Unicode ellispis are nicer than "...", and also save /precious/ space
+      password-cache-expiry nil                   ; I can trust my computers ... can't I?
+      ;; scroll-preserve-screen-position 'always     ; Don't have `point' jump around
+      scroll-margin 2)                            ; It's nice to maintain a little margin
+
+(unless (string-match-p "^Power N/A" (battery))   ; On laptops...
+  (display-battery-mode 1))                       ; it's nice to know how much power you have
+
+(global-subword-mode 1)                           ; Iterate through CamelCase words
 #+end_src
-** Setting the different doom fonts
-doom allows you to customize the interface's fonts through 5 different /optional/ variables
-for each variable you can set the family, size and weight.
-#+begin_src emacs-lisp
+** Doom configuration
+*** Visual Settings
+**** Font Face
+Currently I am using Operator Mono as my main personal system font, it is pretty neat. doom allows you to customize the interface’s fonts through 5 different optional variables, for each variable you can set the family, size and weight.
+#+begin_src elisp
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 13)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 13)
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 #+end_src
-** line numbers
-I personally prefer line numbers to be disabled at all times, it speeds things up, especially on my thinkpad t420 from 2011
-#+begin_src emacs-lisp
-(setq display-line-numbers-type nil)
+**** Theme and modeline
+I find the default doom emacs ~doom-one~ theme to be pretty good, I even themed my whole system around it.
+#+begin_src elisp
+(setq doom-theme 'doom-vibrant)
+(remove-hook 'window-setup-hook #'doom-init-theme-h)
+(add-hook 'after-init-hook #'doom-init-theme-h 'append)
+(delq! t custom-theme-load-path)
 #+end_src
 
-* Cleaning up the dashboard
-first, let's start by making the keybindings simpler when on the doom dashboard since there are no major-mode-specific keybindings to interfear with here.
+While we’re modifying the modeline, LF UTF-8 is the default file encoding, and thus not worth noting in the modeline. So, let’s conditionally hide it.
 #+begin_src elisp
+(defun doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
+  (setq-local doom-modeline-buffer-encoding
+              (unless (and (memq (plist-get (coding-system-plist buffer-file-coding-system) :category)
+                                 '(coding-category-undecided coding-category-utf-8))
+                           (not (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
+                t)))
+
+(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
+#+end_src
+**** Miscellaneous
+Relative line numbers are fantastic for knowing how far away line numbers are, then ESC 12 <UP> gets you exactly where you think.
+#+begin_src elisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+I’d like some slightly nicer default buffer names
+
+#+begin_src elisp
+(setq doom-fallback-buffer-name "► Doom"
+      +doom-dashboard-name "► Doom")
+#+end_src
+*** Other Things
+**** Window Title
+Since I use a Window Manager only system, I don't usually see my window title but when I do, I like it to just have the buffer name, then if applicable the project folder
+#+begin_src elisp
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+#+end_src
+**** Splash Screen
+emacs can render an image (~png~ or ~svg~ etc...), and I like to have the new emacs logo as my splash image
+#+begin_src elisp
+(setq fancy-splash-image "~/.config/doom/emacs-e.svg")
+#+end_src
+Lastly, the dashboard's set of useful commands are no longer useful to me (since I've basically memorized them all) so I prefer to keep clean look, I also like the disable the modeline when using dashboard to be even more minimal
+#+begin_src elisp
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+(add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1) (hl-line-mode -1))
+#+end_src
+**** Dashboard Quick Actions
+since the dashboard is it's own major mode, there is no need for the long key cords for the common commands, they can be replaced with single keystrokes
+#+begin_src elisp
+
+
 (map! :map +doom-dashboard-mode-map
       :ne "f" #'find-file
+      :ne "r" #'consult-recent-file
       :ne "p" #'doom/open-private-config
       :ne "c" (cmd! (find-file (expand-file-name "config.org" doom-private-dir)))
       :ne "q" #'save-buffers-kill-terminal)
-#+end_src
-now, let's remove the =Doom Useful Commands= because I've basically memorized all the keybindings
-#+begin_src elisp
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-#+end_src
-* Org-mode
-Org-mode is a markup language that happens to have built-in task-management, powerful note-taking features etc.. you can watch DistroTube's video to learn more about org-mode.
-all we need to do for org-mode to work, is set an org-mode directory
-#+begin_src emacs-lisp
-(setq org-directory "~/docs/org/")
-
-#+end_src
-just for fun, I like to add a little ding sound effect when ~org-timer-set-timer~ runs out
-#+begin_src elisp
-(setq org-clock-sound "~/docs/ding.wav")
-#+end_src
-I use the =org-fragtog= package to automatically toggle latex fragments, this is the command to set it up
-#+begin_src elisp
-(add-hook 'org-mode-hook 'org-fragtog-mode)
-#+end_src
-** org-roam
-org-roam is a package that extends org-roam's capabilities, it adds features like:
-+ easy backlinking
-+ graph view
-+ daily notes
-in my setup I am using the latest version of org-roam which is *org-roam v2*, once again the most minimal org-roam setup needs a directory to store org-roam files
-#+begin_src emacs-lisp
-(setq org-roam-directory "~/docs/roam")
-#+end_src
-we also need to specifiy a directory for the org-roam dailies, this is relative to ~org-roam-directory~:
-#+begin_src emacs-lisp
-(setq org-roam-dailies-directory "~/docs/roam/daily")
-#+end_src
-I like to add the timestamp to each daily entry, just to be more organized:
-#+begin_src elisp
-(setq org-roam-dailies-capture-templates
-      '(("d" "default" entry "* %<%I:%M %p>: %?"
-         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
-#+end_src
-*** Fast note insertion
-Sometimes while writing, you'll want to create a new node in your Org Roam notes without interrupting your writing flow! Typically you would use org-roam-node-insert, but when you create a new note with this command, it will open the new note after it gets created. this is in some cases kind of annoying, we can use this function to solve this issue:
-#+begin_src elisp
-(defun org-roam-node-insert-immediate (arg &rest args)
-  (interactive "P")
-  (let ((args (cons arg args))
-        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
-    (apply #'org-roam-node-insert args)))
-#+end_src
-finally, let's bind ~org-roam-node-insert-immediate~ to ~SPC n r I~
-#+begin_src elisp
-(map! :leader :desc "Insert node immediatly" :n "n r I" #'org-roam-node-insert-immediate)
-#+end_src
-** Anki-editor
-anki-editor is an emacs package that allows you to make anki flashcards using org-mode
-* Elfeed
-elfeed is the standard modern emacs RSS feed reader. I use it for all my content consumtion. by default elfeed shows only entries from the last 2 weeks, this default filter can be changed
-#+begin_src elisp
-(after! elfeed
-  (setq elfeed-search-filter "@1-week-ago"))
-#+end_src
-
-#+begin_quote
-you can dynamicly change the filter inside elfeed by pressing ~s~
-#+end_quote
-
-we can set emacs to automatically update feed when opening elfeed using the following hook
-#+BEGIN_SRC elisp
-(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-#+END_SRC
-
-I also like to map elfeed to ~SPC r~ instead of typing ~M-x elfeed~ each time
-#+begin_src elisp
-(map! :leader :desc "Open elfeed" :n "r" #'elfeed)
-#+end_src
-* pdf-tools
-this is a package that let's you, read pdf documents inside emacs, it looks and feels like zathura which is the pdf viewer I am used to, except for one thing, I want dark mode to be enabled by default, for that we can use this hook:
-#+begin_SRC emacs-lisp
-(add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
-#+end_SRC
-* RAINBOW MODE
-Rainbox mode displays the actual color for any hex value color.  It's such a nice feature that I wanted it turned on all the time, regardless of what mode I am in.  The following creates a global minor mode for rainbow-mode and enables it.
-
-#+begin_src emacs-lisp
-(define-globalized-minor-mode global-rainbow-mode rainbow-mode
-  (lambda () (rainbow-mode 1)))
-(global-rainbow-mode 1 )
-#+end_src
-
-
-* Which-key
-which-key is the thing that pops up whenever you start typing a command, but it takes too long to show up, let's speed it up a bit
-#+begin_src elisp
-(setq which-key-idle-delay 0.5) ;; I need the help, I really do
-#+end_src
-having the ~evil-~ prefix before every evil-mode command is a bit too verbose let's make that a bit simpler
-#+begin_src elisp
-(setq which-key-allow-multiple-replacements t)
-(after! which-key
-  (pushnew!
-   which-key-replacement-alist
-   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
-   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
-   ))
-#+end_src
-* Dashboard
-I like my dashboard banner to be the default emacs logo
-#+begin_src elisp
-(setq fancy-splash-image "~/.config/doom/emacs-e.svg")
 #+end_src
