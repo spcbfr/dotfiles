@@ -62,34 +62,16 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
-myFont :: String
+   -- variables
 myFont = "xft:IBM Plex Mono:regular:size=9:antialias=true:hinting=true"
-
-myModMask :: KeyMask
-myModMask = mod4Mask        -- Sets modkey to super key
-
-myTerminal :: String
+myModMask = mod4Mask       -- Sets modkey to super key
 myTerminal = "alacritty"
-
-myBrowser :: String
 myBrowser = "brave "
-
-myEmacs :: String
 myEmacs = "emacsclient -c -a 'emacs' "  -- Makes emacs keybindings easier to type
-
-myEditor :: String
 myEditor = "emacsclient -c -a 'emacs' "  -- Sets emacs as editor
-
-myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
-
-myNormColor :: String
 myNormColor   = "#202328"   -- Border color of normal windows
-
-myFocusColor :: String
 myFocusColor  = "#51afef"   -- Border color of focused windows
-
-windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myStartupHook :: X ()
