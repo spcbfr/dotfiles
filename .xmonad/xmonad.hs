@@ -66,7 +66,7 @@ import XMonad.Util.SpawnOnce
 myFont = "xft:IBM Plex Mono:regular:size=9:antialias=true:hinting=true"
 myModMask = mod4Mask       -- Sets modkey to super key
 myTerminal = "alacritty"
-myBrowser = "brave "
+myBrowser = "firefox-developer-edition "
 myEmacs = "emacsclient -c -a 'emacs' "  -- Makes emacs keybindings easier to type
 myEditor = "emacsclient -c -a 'emacs' "  -- Sets emacs as editor
 myBorderWidth = 2           -- Sets border width for windows
@@ -76,10 +76,8 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myStartupHook = do
     spawnOnce "nm-applet &"
-    spawnOnce "picom &"
-    -- spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
     spawnOnce "/usr/bin/emacs --daemon &" -- emacs daemon for the emacsclient
-    spawnOnce "setbg"  -- set xwallpaper
+    spawnOnce "setbg"  -- set xwallpaper using shell script
     setWMName "Xmonad"
 
 myColorizer = colorRangeFromClassName
@@ -189,7 +187,6 @@ myManageHook = composeAll
      , title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
      , className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )
      , className =? "discord"            --> doShift ( myWorkspaces !! 5 )
-     , className =? "spotify"            --> doShift ( myWorkspaces !! 6 ) -- BUG spotify sets it's window classname too late for xmonad to catch it.
      , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , isFullscreen -->  doFullFloat
@@ -275,7 +272,7 @@ myKeys =
         , ("<XF86AudioMute>", spawn "amixer set Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
-        , ("<Print>", spawn "maimpick")
+        , ("<Print>", spawn "maimpick") -- Screenshot menu
         ]
 main = do
     -- Launching xmobar with the configuration file
