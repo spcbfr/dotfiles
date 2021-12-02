@@ -74,7 +74,6 @@ myNormColor   = "#202328"   -- Border color of normal windows
 myFocusColor  = "#51afef"   -- Border color of focused windows
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
-myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "nm-applet &"
     spawnOnce "picom &"
@@ -83,7 +82,6 @@ myStartupHook = do
     spawnOnce "setbg"  -- set xwallpaper
     setWMName "Xmonad"
 
-myColorizer :: Window -> Bool -> X (String, String)
 myColorizer = colorRangeFromClassName
                   (0x28,0x2c,0x34) -- lowest inactive bg
                   (0x28,0x2c,0x34) -- highest inactive bg
@@ -93,12 +91,10 @@ myColorizer = colorRangeFromClassName
 
 
 --Makes setting the spacingRaw simpler to write. The spacingRaw module adds a configurable amount of space around windows.
-mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 -- Below is a variation of the above except no borders are applied
 -- if fewer than two windows. So a single window has no gaps.
-mySpacing' :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
 -- Defining a bunch of layouts, many that I don't use.
@@ -177,7 +173,6 @@ myWorkspaceIndices = M.fromList $ zip myWorkspaces [1..] -- (,) == \x y -> (x,y)
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
 
-myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
         -- Window rules:
         -- className =? "program"  --> doShift ( myWorkspaces !! 7 ) will send program to workspace 8
@@ -201,7 +196,6 @@ myManageHook = composeAll
      ]
 
 -- START_KEYS
-myKeys :: [(String, X ())]
 myKeys =
         [ ("M-C-r", spawn "xmonad --recompile")  -- Recompiles xmonad
         , ("M-S-r", spawn "xmonad --restart")    -- Restarts xmonad
@@ -283,7 +277,6 @@ myKeys =
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
         , ("<Print>", spawn "maimpick")
         ]
-main :: IO ()
 main = do
     -- Launching xmobar with the configuration file
     xmproc <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc"
