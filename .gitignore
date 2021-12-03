@@ -2,7 +2,6 @@
 .idea
 *.log
 tmp/
-config.el
 xmonad.hi
 *.errors
 xmonad.o
