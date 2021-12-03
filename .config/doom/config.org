@@ -1,5 +1,9 @@
 * TODO Introduction
-* STRT Rudimentary Configuration
+* Rudimentary Configuration
+first off, let's make the output file run a tiny bit faster
+#+begin_src elisp
+;;; config.el -*- lexical-binding: t; -*-
+#+end_src
 ** Personal Information
 It is useful to have some basic information, apparently this is used by magit, gpg and such
 #+begin_src elisp
@@ -23,5 +27,37 @@ I’d like to have just the buffer name, then if applicable the project folder
              (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 #+end_src
 For example when I open my config file it the window will be titled ~config.org ● doom~ then as soon as I make a change it will become ~config.org ◉ doom~
-* TODO Doom configuration
-* STRT Packages
+* Doom Configuration
+** Visual Settings
+*** Font Face
+I am always expermienting with new fonts, so expect this to change very often
+#+begin_src elisp
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 13) ;; the default general doom font
+      doom-unicode-font (font-spec :family "Fira Code" :size 13) ;; Fallback unicode font for icons, glyphs, etc...
+      doom-variable-pitch-font (font-spec :family "IBM Plex Mono" :size 15) ;; the font to use for variable-pitch text
+      doom-big-font (font-spec :family "Jetbrains Mono" :size 24)) ;; font used in big-font-mode
+
+#+end_src
+
+I like how italics look so I use them for comments, keywords and other things across my system
+#+begin_src elisp
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+#+end_src
+*** Dashboard
+since the dashboard is its own major-mode, long key cords for quick commands are unnecessary, let's make them simpler
+#+begin_src elisp
+(map! :map +doom-dashboard-mode-map
+      :ne "f" #'find-file
+      :ne "r" #'consult-recent-file
+      :ne "p" #'doom/open-private-config
+      :ne "v" #'vterm/here
+      :ne "c" (cmd! (find-file (expand-file-name "config.org" doom-private-dir)))
+      :ne "q" #'save-buffers-kill-terminal)
+#+end_src
+after using doom for a while, the dashboard "useful commands" are no longer useful. we can remove them for a particularly /clean/ and minimal look
+#+begin_src elisp
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+#+end_src
+* Packages
