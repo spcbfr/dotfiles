@@ -1,6 +1,14 @@
+* TODO Introduction
+* STRT Rudimentary Configuration
+** Personal Information
+It is useful to have some basic information, apparently this is used by magit, gpg and such
+#+begin_src elisp
 (setq user-full-name "spcbfr"
       user-mail-address "spcbfr@protonmail.com")
-
+#+end_src
+** Window title
+I’d like to have just the buffer name, then if applicable the project folder
+#+begin_src elisp
 (setq frame-title-format
       '(""
         (:eval
@@ -13,3 +21,7 @@
          (let ((project-name (projectile-project-name)))
            (unless (string= "-" project-name)
              (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+#+end_src
+For example when I open my config file it the window will be titled ~config.org ● doom~ then as soon as I make a change it will become ~config.org ◉ doom~
+* TODO Doom configuration
+* STRT Packages
