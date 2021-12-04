@@ -1,6 +1,7 @@
 [user]
 	email = youssefbouzekri@protonmail.com
 	name = spcbfr
+	signingkey = 7E7D6CC1BD8D53C2
 [core]
 	editor = emacs
 [init]
