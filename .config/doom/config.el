@@ -17,7 +17,7 @@
              (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 
 (setq doom-font (font-spec :family "IBM Plex Mono" :size 13) ;; the default general doom font
-      doom-unicode-font (font-spec :family "Fira Code" :size 13) ;; Fallback unicode font for icons, glyphs, etc...
+      doom-unicode-font (font-spec :family "Fira Code" :size 12) ;; Fallback unicode font for icons, glyphs, etc...
       doom-variable-pitch-font (font-spec :family "IBM Plex Mono" :size 15) ;; the font to use for variable-pitch text
       doom-big-font (font-spec :family "Jetbrains Mono" :size 24)) ;; font used in big-font-mode
 
@@ -34,3 +34,20 @@
       :ne "q" #'save-buffers-kill-terminal)
 
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+
+(add-hook 'pdf-view-mode-hook (lambda ()
+                                (pdf-view-midnight-minor-mode))) ; automatically turns on midnight-mode for pdfs
+
+(add-hook! '(text-mode-hook prog-mode-hook conf-mode-hook) #'rainbow-mode)
+
+(remove-hook 'emacs-everywhere-init-hooks #'hide-mode-line-mode)
+
+(defadvice! center-emacs-everywhere-in-origin-window (frame window-info)
+  :override #'emacs-everywhere-set-frame-position
+  (cl-destructuring-bind (x y width height)
+      (emacs-everywhere-window-geometry window-info)
+    (set-frame-position frame
+                        (+ x (/ width 2) (- (/ width 2)))
+                        (+ y (/ height 2)))))
+
+(setq emacs-everywhere-frame-name-format "emacs-everywhere")
