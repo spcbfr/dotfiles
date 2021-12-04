@@ -17,7 +17,9 @@ export MPD_PORT="6601"
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
-
+# GPG agent
+export GPG_TTY=$(tty)
+export GPGKEY=BD8D53C2
 # Load aliases and shortcuts if existent.
 alias g=git
 alias p=paru
