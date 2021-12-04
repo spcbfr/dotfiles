@@ -36,12 +36,11 @@ I am always expermienting with new fonts, so expect this to change very often
 #+begin_src elisp
 (setq doom-font (font-spec :family "IBM Plex Mono" :size 13) ;; the default general doom font
       doom-unicode-font (font-spec :family "Fira Code" :size 12) ;; Fallback unicode font for icons, glyphs, etc...
-      doom-variable-pitch-font (font-spec :family "IBM Plex Mono" :size 15) ;; the font to use for variable-pitch text
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 15) ;; the font to use for variable-pitch text
       doom-big-font (font-spec :family "Jetbrains Mono" :size 24)) ;; font used in big-font-mode
 
 #+end_src
-
-I like how italics look so I use them for comments, keywords and other things across my system
+I like how italics look (especially with IBM plex mono and with jetbrains mono) so I use them for comments, keywords and other things across my system
 #+begin_src elisp
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
@@ -62,6 +61,12 @@ after using doom for a while, the dashboard "useful commands" are no longer usef
 #+begin_src elisp
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 #+end_src
+*** Line numbers
+I never look at line numbers and it makes doom a bit slower so I decided to get rid of them all together
+#+begin_src elisp
+(setq display-line-numbers-type nil)
+#+end_src
+
 * Packages
 ** pdf-tools
 pdf-tools is the package that most people use to open, navigate and read pdf's within emacs. thankfully doom has a module for it so we don't have to write our own config. The only thing I would change is set the midnight-mode (aka dark-mode) to be the default
@@ -93,4 +98,41 @@ semi-center the popup over the target window
 and finally, make emacs-everywhere easier to match with an xmonad rule
 #+begin_src elisp
 (setq emacs-everywhere-frame-name-format "emacs-everywhere")
+#+end_src
+** Org-mode, the killer feature of emacs
+org-mode is a quite powerful task-management and note-taking tool, in fact, I am using org-mode right now to write this literate configuration, orgmode is available as a doom module that is enabled by default
+
+Let's start by setting the org-directory
+#+begin_src elisp
+(setq org-directory "~/docs/org")
+#+end_src
+*** org-roam
+org-roam is a package that extends the default org functionality, allowing things like daily notes, and backlinks, similar to [[https:roamresearch.com/][Roam Research]] which inspired org-roam. the only thing that is really required for org-roam is the directory in which org-roam files are stored
+#+begin_quote
+note that org-roam files, are just org-mode files that have an id making org-roam able to organise them in neat ways
+#+end_quote
+we also need to specifiy a directory for the org-roam dailies, this is relative to ~org-roam-directory~
+#+begin_src elisp
+(setq org-roam-dailies-directory "daily")
+#+end_src
+I like to add a timestamp to each org-roam-dailies entry, just to be a /little/ bit more organised
+#+begin_src elisp
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry "* %<%I:%M %p>: %?"
+         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+#+end_src
+** which-key
+which-key is the thing that pops up whenever you start typing a key-cord, it is pretty useful but it takes a long time to show up. let's speed things up a bit
+#+begin_src elisp
+(setq which-key-idle-delay 0.5) ;; I need the help, I really do
+#+end_src
+having the ~evil-~ prefix before every evil-mode command is a bit too verbose, I prefer to keep things simple
+#+begin_src elisp
+(setq which-key-allow-multiple-replacements t)
+(after! which-key
+  (pushnew!
+   which-key-replacement-alist
+   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
+   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
+   ))
 #+end_src
