@@ -66,7 +66,7 @@ import XMonad.Util.SpawnOnce
 myFont = "xft:IBM Plex Mono:regular:size=9:antialias=true:hinting=true"
 myModMask = mod4Mask       -- Sets modkey to super key
 myTerminal = "alacritty"
-myBrowser = "firefox-developer-edition "
+myBrowser = "firefox "
 myEmacs = "emacsclient -c -a 'emacs' "  -- Makes emacs keybindings easier to type
 myEditor = "emacsclient -c -a 'emacs' "  -- Sets emacs as editor
 myBorderWidth = 2           -- Sets border width for windows
