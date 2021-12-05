@@ -1,4 +1,4 @@
-* TODO Introduction
+* Introduction
 Welcome to my doom emacs literate configuration. this file sort of acts as both the configuration and the documentation at the same time. the elisp (emacs variant of lisp) code blocks get /tangled/ to the ~config.el~ file. this is made possible through the doom emacs module *literate*.
 now you might be wondering why someone would still use emacs in <insert current year>, well I think this [[yt:bEfYm8sAaQg][video]] by systemcrafters explains this best. now let's get into the actual configuration
 * Rudimentary Configuration
