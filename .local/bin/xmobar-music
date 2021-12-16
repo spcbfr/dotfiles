@@ -9,12 +9,12 @@ TCOL="#DFDFDF"         # The colour to be used to draw the song title when playi
 ACOL="#9ca0a4"    # The colour to be used to draw the song artist when playing
 PCOL="#73797e"      # The colour to be used to draw both the song title and artist when paused
 
-MPDSTATE=$(mpc | sed -e '2 !d' -e 's/^.*\[//' -e 's/\].*$//')
+PLAYERSTATE=$(playerctl --ignore-player=firefox status)
 
-if [ $MPDSTATE == "playing" ]; then
+if [ $PLAYERSTATE == "Playing" ]; then
   # MPD is playing
-  echo "<fc=$ACOL>$(mpc current | sed "s/ - /\<\/fc\> - \<fc=$TCOL>/")</fc>"
-elif [ $MPDSTATE == "paused" ]; then
+  echo "<fc=$ACOL>$(playerctl --ignore-player=firefox metadata artist)</fc> - <fc=$TCOL>$(playerctl --ignore-player=firefox metadata title)</fc>"
+elif [ $PLAYERSTATE == "Paused" ]; then
   # MPD is paused
-  echo "<fc=$PCOL>$(mpc current)</fc>"
+  echo "<fc=$PCOL>$(playerctl --ignore-player=firefox metadata artist) - $(playerctl --ignore-player=firefox metadata title)</fc>"
 fi

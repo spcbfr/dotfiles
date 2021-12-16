@@ -3,8 +3,8 @@
 	name = spcbfr
 	signingkey = 7E7D6CC1BD8D53C2
 [core]
-	editor = emacs
+	editor = emacsclient -c -a \\\"emacs\\\"
 [init]
 	defaultBranch = main
 [commit]
-	gpgsign = true
+	gpgsign = false

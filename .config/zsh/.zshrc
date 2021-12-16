@@ -1,22 +1,19 @@
-# Luke's config for the Zoomer Shell
-
 # Enable colors and change prompt:
 autoload -U colors && colors	# Load colors
-PS1="%B%{$fg[yellow]%}Ⲗ%b "
-setopt autocd		# Automatically cd into typed directory.
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
-export PATH=$PATH:/$HOME/.local/bin:/$HOME/.emacs.d/bin
+export PATH=$PATH:/$HOME/.local/bin:/$HOME/.config/emacs/bin
 export EDITOR=nvim
-export XDG_DATA_HOME=$HOME/.local/share
+export XDG_DATA_HOME="$HOME"/.local/share
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export MPD_HOST="localhost"
 export MPD_PORT="6601"
 # History in cache directory:
 HISTSIZE=10000000
-SAVEHIST=10000000
-HISTFILE=~/.cache/zsh/history
+SAVEHIST=10000000 HISTFILE=~/.cache/zsh/history
 # GPG agent
 export GPG_TTY=$(tty)
 export GPGKEY=BD8D53C2
@@ -26,14 +23,14 @@ alias p=paru
 alias ls="exa --icons --color=always --group-directories-first"
 alias cat="bat --theme TwoDark" # Bat is a cat alternative, it shows pretty output
 alias grep='grep --color=always'
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' # needed for my git bare repositorie setup for my dotfiles
+alias dot='/usr/bin/git --git-dir=$HOME/dots/ --work-tree=$HOME' # needed for my git bare repositorie setup for my dotfiles
 alias df="df -h"
 alias free="free -m"
 alias cp="cp -i"
 
 # window swallowing
 alias m="devour mpv"
-alias sxiv="devour nsxiv"
+alias s="devour sxiv"
 alias z="devour zathura"
 alias clear="echo -en \"\x1b[2J\x1b[1;1H\"" # This syntax is 40 times faster than /bin/clear
 
@@ -135,6 +132,6 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load syntax highlighting; should be last.
-source /home/youssef/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export WEBKIT_FORCE_SANDBOX=0

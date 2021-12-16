@@ -267,10 +267,10 @@ myKeys =
         , ("M-e l", spawn ("doom everywhere"))  -- vterm
 
     -- KB_GROUP Multimedia Keys
-        , ("<XF86AudioPlay>", spawn "mpc toggle")
-        , ("<XF86AudioStop>", spawn "mpc stop")
-        , ("<XF86AudioPrev>", spawn "mpc prev")
-        , ("<XF86AudioNext>", spawn "mpc next")
+        , ("<XF86AudioPlay>", spawn "playerctl --ignore-player=firefox play-pause")
+        , ("<XF86AudioStop>", spawn "playerctl --ignore-player=firefox stop")
+        , ("<XF86AudioPrev>", spawn "playerctl --ignore-player=firefox previous")
+        , ("<XF86AudioNext>", spawn "playerctl --ignore-player=firefox next")
         , ("<XF86AudioMute>", spawn "amixer set Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
@@ -299,7 +299,8 @@ main = do
               , ppVisible = xmobarColor "#bbc2cf" "" . clickable              -- Visible but not current workspace
               , ppHidden = xmobarColor "#51afef" "" . clickable -- Hidden workspaces
               , ppHiddenNoWindows = xmobarColor "#d6deeb" ""  . clickable     -- Hidden workspaces (no windows)
-              , ppTitle = xmobarColor "#bbc2cf" "" . shorten 50               -- Title of active window
+              -- , ppTitle = xmobarColor "#bbc2cf" "" . shorten 50               -- Title of active window
+              , ppTitle = const ""
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
               , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"            -- Urgent workspace
               , ppExtras  = [windowCount]                                     -- # of windows current workspace
