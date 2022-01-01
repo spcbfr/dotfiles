@@ -7,8 +7,8 @@ Config { font    = "xft:IBM Plex Mono:weight=bold:pixelsize=10:antialias=true:hi
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
                            ]
-       , bgColor = "#24283b"
-       , fgColor = "#a9b1d6"
+       , bgColor = "#282c34"
+       , fgColor = "#bbc2cf"
        , position = Static { xpos = 0 , ypos = 0, width = 1366, height = 24 }
        , lowerOnStart = True
        , hideOnStart = False
@@ -41,6 +41,5 @@ Config { font    = "xft:IBM Plex Mono:weight=bold:pixelsize=10:antialias=true:hi
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{<action=`alacritty -e ncmpcpp`>%music%</action>   <box type=Bottom width=2 color=#ad8ee6><fc=#ad8ee6><action=`alacritty -e pulsemixer`>%default:Master%</action></fc></box>   <box type=Bottom width=2 color=#0db9d7><fc=#0db9d7><action=`firefox https://wttr.in/tunis`>%DTTA%</action></fc></box>   <box type=Bottom width=2 color=#9ece6a><fc=#9ece6a><action=`alacritty -e htop`>%cpu%</action></fc></box>   <box type=Bottom width=2 color=#f7768e><fc=#f7768e><action=`alacritty -e htop`>%memory%</action></fc></box>   <box type=Bottom width=2 color=#e0af68><fc=#e0af68><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>   "
-
+       , template = " %UnsafeStdinReader% }{<fc=#DFDFDF><action=`alacritty -e ncmpcpp`>%music%</action></fc>   <box type=Bottom width=2 color=#a9a1e1><fc=#a9a1e1><action=`alacritty -e pulsemixer`>%default:Master%</action></fc></box>   <box type=Bottom width=2 color=#51afef><fc=#51afef><action=`firefox https://wttr.in/tunis`>%DTTA%</action></fc></box>   <box type=Bottom width=2 color=#98be65><fc=#98be65><action=`alacritty -e htop`>%cpu%</action></fc></box>   <box type=Bottom width=2 color=#ff6c6b><fc=#ff6c6b><action=`alacritty -e htop`>%memory%</action></fc></box>   <box type=Bottom width=2 color=#ecbe7b><fc=#ecbe7b><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>   "
        }

@@ -33,7 +33,7 @@
 ;; release. The `unpin!' macro allows you to unpin single packages...
 ;(unpin! pinned-package)
 
-;; Ebooks
-(package! calibredb)
-(package! visual-fill-column)
-(package! nov)
+
+(package! org-fragtog)
+(unpin! org-roam)
+(package! org-roam-ui)

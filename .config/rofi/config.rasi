@@ -1,9 +1,9 @@
 configuration{
     modi: "drun";
-    font: "Iosevka 12";
+    font: "Operator Mono Book 11";
     show-icons: true;
     icon-theme: "Oranchelo";
-    terminal: "st";
+    terminal: "alacritty";
     drun-display-format: "{icon} {name}";
     display-drun: "  ";
     location: 0;
