@@ -24,6 +24,37 @@ schemes:
       magenta: '#f2e15c'
       cyan:    '#7a5ccc'
       white:   '#f0f1ce'
+  gruvbox_dark_hard: &gruvbox_dark_hard
+    primary:
+        background: '0x1d2021'
+        foreground: '0xd5c4a1'
+
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+        text: '0x1d2021'
+        cursor: '0xd5c4a1'
+
+    # Normal colors
+    normal:
+        black:   '0x1d2021'
+        red:     '0xfb4934'
+        green:   '0xb8bb26'
+        yellow:  '0xfabd2f'
+        blue:    '0x83a598'
+        magenta: '0xd3869b'
+        cyan:    '0x8ec07c'
+        white:   '0xd5c4a1'
+
+    # Bright colors
+    bright:
+        black:   '0x665c54'
+        red:     '0xfe8019'
+        green:   '0x3c3836'
+        yellow:  '0x504945'
+        blue:    '0xbdae93'
+        magenta: '0xebdbb2'
+        cyan:    '0xd65d0e'
+        white:   '0xfbf1c7'
 
   night_owl: &night_owl
     primary:
@@ -141,9 +172,151 @@ schemes:
       magenta: '0xbb9af7'
       cyan:    '0x0db9d7'
       white:   '0xacb0d0'
+  gruvbox_material_hard_dark: &gruvbox_material_hard_dark
+    primary:
+      background: '0x1d2021'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x32302f'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x32302f'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_medium_dark: &gruvbox_material_medium_dark
+    primary:
+      background: '0x282828'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x3c3836'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x3c3836'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_soft_dark: &gruvbox_material_soft_dark
+    primary:
+      background: '0x32302f'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x45403d'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x45403d'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_hard_light: &gruvbox_material_hard_light
+    primary:
+      background: '0xf9f5d7'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xf2e5bc'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xf2e5bc'
+  gruvbox_material_medium_light: &gruvbox_material_medium_light
+    primary:
+      background: '0xfbf1c7'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xeee0b7'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xeee0b7'
+  gruvbox_material_soft_light: &gruvbox_material_soft_light
+    primary:
+      background: '0xf2e5bc'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xe6d5ae'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xe6d5ae'
+  primary_dark: &primary_dark
+    primary:
+      background: '0x2c2621'
+      foreground: '0xf6e7d5'
+    normal:
+      black:  '0x231e1a'
+      red:    '0xdb6057'
+      green:  '0x38b27d'
 
 
-colors: *tokyo-night
+
+
+colors: *doom-one
 window:
     padding:
       x: 2

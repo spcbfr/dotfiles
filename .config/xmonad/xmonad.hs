@@ -66,7 +66,7 @@ import XMonad.Util.SpawnOnce
 myFont = "xft:IBM Plex Mono:regular:size=9:antialias=true:hinting=true"
 myModMask = mod4Mask       -- Sets modkey to super key
 myTerminal = "alacritty"
-myBrowser = "firefox "
+myBrowser = "brave"
 myEmacs = "emacsclient -c -a 'emacs' "  -- Makes emacs keybindings easier to type
 myEditor = "emacsclient -c -a 'emacs' "  -- Sets emacs as editor
 myBorderWidth = 2           -- Sets border width for windows
@@ -199,7 +199,7 @@ myKeys =
         , ("M-S-r", spawn "xmonad --restart")    -- Restarts xmonad
         , ("M-S-q", io exitSuccess)              -- Quits xmonad
         , ("M-s", spawn "maimpick")              -- taking screenshots
-        , ("M-d", spawn "dmenu_run -l 20") -- Dmenu
+        , ("M-d", spawn "rofi -show drun") -- Dmenu
         , ("M-`", spawn "dmenuunicode") -- Dmenu
 
     -- KB_GROUP Useful programs to have a keybinding for launch
@@ -268,8 +268,8 @@ myKeys =
         , ("M-e l", spawn ("doom everywhere"))  -- vterm
 
     -- KB_GROUP Multimedia Keys
-        , ("<XF86AudioPlay>", spawn "playerctl --ignore-player=firefox play-pause")
-        , ("<XF86AudioStop>", spawn "playerctl --ignore-player=firefox stop")
+        , ("<XF86AudioPlay>", spawn "playerctl --ignore-player=chromium play-pause")
+        , ("<XF86AudioStop>", spawn "playerctl --ignore-player=chromium stop")
         , ("<XF86AudioPrev>", spawn "playerctl --ignore-player=firefox previous")
         , ("<XF86AudioNext>", spawn "playerctl --ignore-player=firefox next")
         , ("<XF86AudioMute>", spawn "amixer set Master toggle")
@@ -293,19 +293,18 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
-        , logHook = dynamicLogWithPP $ xmobarPP
-              -- Xmobar Settings
-              { ppOutput = hPutStrLn xmproc                                   -- launching xmobar
-              , ppCurrent = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 color=#c678dd>" "</box>"         -- Current workspace
-              , ppVisible = xmobarColor "#bbc2cf" "" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#51afef" "" . clickable -- Hidden workspaces
-              , ppHiddenNoWindows = xmobarColor "#d6deeb" ""  . clickable     -- Hidden workspaces (no windows)
-              -- , ppTitle = xmobarColor "#bbc2cf" "" . shorten 50               -- Title of active window
-              , ppTitle = const ""
-              , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
-              , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"            -- Urgent workspace
-              , ppExtras  = [windowCount]                                     -- # of windows current workspace
-              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
-              }
-        } `additionalKeysP` myKeys
-
+         , logHook = dynamicLogWithPP $ xmobarPP
+               -- Xmobar Settings
+               { ppOutput = hPutStrLn xmproc                                   -- launching xmobar
+               ,ppCurrent = xmobarColor "#c678dd" "" . wrap "<box type=Bottom width=2 color=#c678dd>" "</box>"         -- Current workspace
+               , ppVisible = xmobarColor "#bbc2cf" "" . clickable              -- Visible but not current workspace
+               , ppHidden = xmobarColor "#51afef" "" . clickable -- Hidden workspaces
+               , ppHiddenNoWindows = xmobarColor "#d6deeb" ""  . clickable     -- Hidden workspaces (no windows)
+               -- , ppTitle = xmobarColor "#bbc2cf" "" . shorten 50               -- Title of active window
+               , ppTitle = const ""
+               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
+               , ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"            -- Urgent workspace
+               , ppExtras  = [windowCount]                                     -- # of windows current workspace
+               , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
+               }
+         } `additionalKeysP` myKeys

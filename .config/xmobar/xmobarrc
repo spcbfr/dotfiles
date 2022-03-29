@@ -4,8 +4,8 @@
 
 Config { font    = "xft:IBM Plex Mono:weight=bold:pixelsize=10:antialias=true:hinting=true"
        , additionalFonts = [ "xft:IBM Plex Sans Arabic:pixelsize=11:antialias=true:hinting=true"
-                           , "xft:Font Awesome 5 Free Solid:pixelsize=12"
-                           , "xft:Font Awesome 5 Brands:pixelsize=12"
+                           , "xft:Font Awesome 6 Free Solid:pixelsize=12"
+                           , "xft:Font Awesome 6 Brands:pixelsize=12"
                            ]
        , bgColor = "#24283b"
        , fgColor = "#a9b1d6"
@@ -17,7 +17,7 @@ Config { font    = "xft:IBM Plex Mono:weight=bold:pixelsize=10:antialias=true:hi
        , iconRoot = "~/.xmonad/xpm/"  -- default: "."
        , commands = [
                     -- Time and date
-                      Run Date "<fn=2>\xf017</fn> %I:%M %p " "date" 50
+                      Run Date "<fn=2>\xf017</fn> %a %dth %I:%M " "date" 50
                       -- Network up and down
                     , Run Network "enp6s0" ["-t", "<fn=2>\xf0ab</fn>  <rx>kb  <fn=2>\xf0aa</fn>  <tx>kb"] 20
                       -- Cpu usage in percent
@@ -41,6 +41,7 @@ Config { font    = "xft:IBM Plex Mono:weight=bold:pixelsize=10:antialias=true:hi
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{<action=`alacritty -e ncmpcpp`>%music%</action>   <box type=Bottom width=2 color=#ad8ee6><fc=#ad8ee6><action=`alacritty -e pulsemixer`>%default:Master%</action></fc></box>   <box type=Bottom width=2 color=#0db9d7><fc=#0db9d7><action=`firefox https://wttr.in/tunis`>%DTTA%</action></fc></box>   <box type=Bottom width=2 color=#9ece6a><fc=#9ece6a><action=`alacritty -e htop`>%cpu%</action></fc></box>   <box type=Bottom width=2 color=#f7768e><fc=#f7768e><action=`alacritty -e htop`>%memory%</action></fc></box>   <box type=Bottom width=2 color=#e0af68><fc=#e0af68><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>   "
+       , template = " %UnsafeStdinReader% }{<action=`alacritty -e ncmpcpp`>%music%</action>   <box type=Bottom width=2 color=#ad8ee6><fc=#ad8ee6><action=`alacritty -e pulsemixer`>%default:Master%</action></fc></box>   <box type=Bottom width=2 color=#0db9d7><fc=#0db9d7><action=`firefox https://wttr.in/tunis`>%DTTA%</action></fc></box>   <box type=Bottom width=2 color=#9ece6a><fc=#9ece6a><action=`alacritty -e btop`>%cpu%</action></fc></box>   <box type=Bottom width=2 color=#f7768e><fc=#f7768e><action=`alacritty -e btop`>%memory%</action></fc></box>   <box type=Bottom width=2 color=#e0af68><fc=#e0af68><action=`emacsclient -c -a 'emacs' --eval '(org-roam-dailies-goto-today)'`>%date%</action></fc></box>  "
+
 
        }
